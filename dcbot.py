@@ -30,9 +30,6 @@ bot = discord.Client(intents = intents)
 tree = discord.app_commands.CommandTree(bot)
 _log = logging.getLogger('discord.MCDC')
 
-# global mcdc list
-all_mcdc = requests.get('%s/linked/all' % config.mcdc_api).json()
-
 def acc_type(account: str) -> str:
     return 'dc' if account.find('<@') != -1 else 'mc'
 
@@ -47,28 +44,13 @@ def is_admin(interaction: discord.Interaction) -> bool:
         if config.admin_roles.count(str(_user_role.id)): return True
     return False
 
-async def mcname_autocomplete(
-    interaction: discord.Interaction,
-    current: str,
-) -> List[discord.app_commands.Choice[str]]:
-    global all_mcdc
-    mcnames = []
-    for mcdc in all_mcdc: mcnames.append(mcdc['mcname'])
-
-    return [
-        discord.app_commands.Choice(name=mcname, value=mcname)
-        for mcname in mcnames if current.lower() in mcname.lower()
-    ]
-
 @tree.command(name = 'list', description = 'List all linked account')
 @discord.app_commands.describe(account = 'Minecraft name or Discord @user')
-@discord.app_commands.autocomplete(account=mcname_autocomplete)
 async def list_all(interaction: discord.Interaction, account: Optional[str]):
     if is_admin(interaction) == False:
         await interaction.response.send_message('只有管理員能使用此指令', ephemeral=True)
         return
 
-    global all_mcdc
     all_mcdc = requests.get('%s/linked/all' % config.mcdc_api).json()
 
     embed = discord.Embed(title='Linked Accounts', color=discord.Color.green())
@@ -106,7 +88,6 @@ async def list_all(interaction: discord.Interaction, account: Optional[str]):
 
 @tree.command(name = 'unlink', description = 'unlink account')
 @discord.app_commands.describe(account = 'Minecraft name or Discord @user')
-@discord.app_commands.autocomplete(account=mcname_autocomplete)
 async def unlink(interaction: discord.Interaction, account: str):
     if is_admin(interaction) == False:
         await interaction.response.send_message('只有管理員能使用此指令', ephemeral=True)
