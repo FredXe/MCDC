@@ -15,6 +15,7 @@ from config import load_config, BasicConfig
 # MCDC config
 MCDC_CONFIG_FILE = 'mcdc_config.json'
 class McDcConfig(BasicConfig):
+    port: int = 5555
     bot_token: str = 'discord_bot_token'
     bot_client_id: str = 'xxxxxxxxxxxxxxx'
     bot_client_secret: str = 'xxxxxxxxxxxxxxx'
@@ -283,7 +284,7 @@ def delete():
     return json.dumps(res, default=lambda obj: obj.__dict__, sort_keys=True, indent=2)
 
 if __name__ == '__main__':
-    app.run(port=20080, debug=True,)
+    app.run(port=config.port, debug=True,)
 
 
 
