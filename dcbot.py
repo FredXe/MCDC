@@ -70,7 +70,7 @@ async def list_all(interaction: discord.Interaction, account: Optional[str]):
                     break
         else:
             for mcdc in all_mcdc:
-                if mcdc['mcname'].lower() == account:
+                if mcdc['mcname'].lower() == account.lower():
                     dcid = f"<@{mcdc['dcid']}>"
                     mcname = mcdc['mcname']
                     break
