@@ -85,7 +85,6 @@ def encrypt_uuid(id: str) -> str:
 
 def till_player_join(server: PluginServerInterface, rcon: RconConnection, player: str):
     while str(rcon.send_command(f'list')).find(player) == -1:
-        server.execute(f'send {player} {config.lobby_rcon.proxy_server_name}')
         time.sleep(0.1)
 
 # Kick function for count down
