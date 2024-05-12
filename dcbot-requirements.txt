@@ -1,0 +1,4 @@
+discord
+requests
+cryptography
+mcdreforged>=2.2.0

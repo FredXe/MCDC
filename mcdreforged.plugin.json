@@ -1,0 +1,9 @@
+{
+    "id": "whitelist_spoon",
+    "version": "1.0.0",
+    "name": "Whitelist for Spoon server",
+    "dependencies": {
+        "mcdreforged": ">=2.12.0"
+    },
+    "entrypoint": "whitelist_spoon"
+}

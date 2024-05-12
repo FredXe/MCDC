@@ -1,0 +1,6 @@
+gunicorn
+Flask
+requests
+prisma
+cryptography
+mcdreforged>=2.2.0

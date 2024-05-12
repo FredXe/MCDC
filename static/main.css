@@ -1,0 +1,207 @@
+:root {
+    --background-color: #262423;
+    --mc-light-green: #52A535;
+    --gray: #3e3e3e;
+    --mc-light-green-opac: #52a53566;
+    --color2: #235517;
+    --mc-green: #3C8527;
+    --mc-green-2: #2A641C;
+    --mc-green-3: #337221;
+    --mc-dark-green: #15330e;
+    --mc-dark-green-2: #325D25;
+    --mc-dark-gray: #262423;
+    --discord-color: #404eed;
+    --discord-color-opac: #404eed66;
+    --text-color: #ffffff;
+
+    --mes-width: 28vw;
+    --mes-height: 60vh;
+}
+
+.background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    
+}
+
+.background-img {
+    flex-shrink: 0;
+    min-width: 110%;
+    min-height: 110%;
+    filter: blur(1vh);
+}
+
+.info {
+    font-family: arial,"Microsoft JhengHei","微軟正黑體",sans-serif !important;
+}
+
+.mes {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    width: var(--mes-width);
+    height: var(--mes-height);
+    border-radius: 3.5vb;
+    box-shadow: 2vb 2vb 3vb rgba(0, 0, 0, 0.3);
+    background-color: var(--background-color);
+    overflow: hidden;
+
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.mes .account-info {
+    display: grid;
+    grid-template-areas: 
+        "dc-info    link-icon  mc-info";
+    grid-template-columns: 2fr 1fr 2fr;
+    width: 100%;
+    height: 100%;
+}
+
+.mes .icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon .info-icon {
+    padding-top: calc(var(--mes-height) * 0.13);
+    width: calc(var(--mes-width) * 0.5);
+    fill: var(--gray);
+    filter: drop-shadow( 0.5rem 0.5rem 0.8rem rgba(0, 0, 0, 0.15));
+}
+
+.mes .info-text {
+    width: 100%;
+    height: 100%;
+    padding-bottom: calc(var(--mes-height) * 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.8rem;
+    color: var(--text-color);
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+}
+
+.info-card.dc-info {
+    grid-area: dc-info;
+}
+
+.info-card.link-icon {
+    grid-area: link-icon;
+    width: 100%;
+}
+
+.info-card.mc-info {
+    grid-area: mc-info;
+}
+
+.avatar {
+    width: calc(var(--mes-width) * 0.4 * 0.6);
+    display: flex;
+    justify-content: center;
+    /* height: 70%; */
+}
+
+.avatar img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    /* box-shadow: 0 0 1.5rem rgba(255, 255, 255, 0.15); */
+}
+
+.dc-info .avatar img {
+    box-shadow: 0 0 2rem var(--discord-color-opac);
+}
+
+.mc-info .avatar img {
+    box-shadow: 0 0 2rem var(--mc-light-green-opac);
+}
+
+.info-card .info {
+    max-width: calc(var(--mes-width) * 0.4);
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    overflow: hidden;
+}
+
+.link-icon {
+    width: 70%;
+    fill: var(--gray);
+    filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, 0.15));
+}
+
+.mes .comfirm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.comfirm .info {
+    color: var(--text-color);
+    font-size: calc(var(--mes-width) / 18);
+    padding-bottom: 0.2rem;
+}
+
+.btn-container {
+    border-width: 10px;
+    border-color: var(--mc-dark-gray);
+}
+
+.comfirm .btn {
+    --btn-width: calc(var(--mes-width) * 0.3);
+    --btn-height: calc(var(--mes-height) * 0.1);
+    width: var(--btn-width);
+    height: var(--btn-height);
+    margin-top: calc(var(--mes-height) * 0.05);
+    margin-bottom: calc(var(--mes-height) * 0.12);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: var(--mc-green);
+    
+    border-left: 1px solid var(--mc-dark-green-2);
+    border-right: 1px solid var(--mc-dark-green-2);
+    border-top: calc(var(--btn-height) * 0.12) solid var(--mc-light-green);
+    border-bottom: calc(var(--btn-height) * 0.12) solid var(--mc-green-2);
+}
+
+.comfirm .btn:hover {
+    cursor: pointer;
+    background-color: var(--mc-green-3);
+}
+
+.btn.info {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.btn .form-icon {
+    display: flex;
+    justify-content: center;
+    width: 1.3rem;
+    margin-left: 0.2rem;
+    fill: var(--text-color);
+}

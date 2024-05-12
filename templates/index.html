@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/main.css'>
+    <title>晚安鎮接線生🍚</title>
+    <link rel="shortcut icon" href="/static/favicon.png" type="image/x-icon">
+</head>
+<body style="margin: 0;">
+    <div class="background">
+        <img class="background-img" src="/static/image.png" alt="" >
+        <div class="mes js-tilt">
+            {% if info %}
+            <div class="icon">
+                <div class="info-icon">
+                    {% if infotype == 'token_timeout' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>clock-alert-outline</title><path d="M11 7V13L16.2 16.1L17 14.9L12.5 12.2V7H11M20 12V18H22V12H20M20 20V22H22V20H20M18 20C16.3 21.3 14.3 22 12 22C6.5 22 2 17.5 2 12S6.5 2 12 2C16.8 2 20.9 5.4 21.8 10H19.7C18.8 6.6 15.7 4 12 4C7.6 4 4 7.6 4 12S7.6 20 12 20C14.4 20 16.5 18.9 18 17.3V20Z" /></svg>
+                    {% elif infotype == 'already_linked' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>sync-alert</title><path d="M11,13H13V7H11M21,4H15V10L17.24,7.76C18.32,8.85 19,10.34 19,12C19,14.61 17.33,16.83 15,17.65V19.74C18.45,18.85 21,15.73 21,12C21,9.79 20.09,7.8 18.64,6.36M11,17H13V15H11M3,12C3,14.21 3.91,16.2 5.36,17.64L3,20H9V14L6.76,16.24C5.68,15.15 5,13.66 5,12C5,9.39 6.67,7.17 9,6.35V4.26C5.55,5.15 3,8.27 3,12Z" /></svg>
+                    {% elif infotype == 'linked_successfully' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>account-check-outline</title><path d="M21.1,12.5L22.5,13.91L15.97,20.5L12.5,17L13.9,15.59L15.97,17.67L21.1,12.5M11,4A4,4 0 0,1 15,8A4,4 0 0,1 11,12A4,4 0 0,1 7,8A4,4 0 0,1 11,4M11,6A2,2 0 0,0 9,8A2,2 0 0,0 11,10A2,2 0 0,0 13,8A2,2 0 0,0 11,6M11,13C11.68,13 12.5,13.09 13.41,13.26L11.74,14.93L11,14.9C8.03,14.9 4.9,16.36 4.9,17V18.1H11.1L13,20H3V17C3,14.34 8.33,13 11,13Z" /></svg>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="info-text">
+                {{info}}
+            </div>
+            {% elif link %}
+            <div class="account-info">
+                <div class="info-card dc-info">
+                    <div class="avatar">
+                        <img src="https://cdn.discordapp.com/avatars/{{dcid}}/{{dcavatar}}" alt="">
+                    </div>
+                    <div class="info">
+                        {{dcnick}}
+                    </div>
+                </div>
+                <div class="info-card link-icon">
+                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>link-variant</title><path d="M10.59,13.41C11,13.8 11,14.44 10.59,14.83C10.2,15.22 9.56,15.22 9.17,14.83C7.22,12.88 7.22,9.71 9.17,7.76V7.76L12.71,4.22C14.66,2.27 17.83,2.27 19.78,4.22C21.73,6.17 21.73,9.34 19.78,11.29L18.29,12.78C18.3,11.96 18.17,11.14 17.89,10.36L18.36,9.88C19.54,8.71 19.54,6.81 18.36,5.64C17.19,4.46 15.29,4.46 14.12,5.64L10.59,9.17C9.41,10.34 9.41,12.24 10.59,13.41M13.41,9.17C13.8,8.78 14.44,8.78 14.83,9.17C16.78,11.12 16.78,14.29 14.83,16.24V16.24L11.29,19.78C9.34,21.73 6.17,21.73 4.22,19.78C2.27,17.83 2.27,14.66 4.22,12.71L5.71,11.22C5.7,12.04 5.83,12.86 6.11,13.65L5.64,14.12C4.46,15.29 4.46,17.19 5.64,18.36C6.81,19.54 8.71,19.54 9.88,18.36L13.41,14.83C14.59,13.66 14.59,11.76 13.41,10.59C13,10.2 13,9.56 13.41,9.17Z" /></svg>
+                </div>
+                <div class="info-card mc-info">
+                    <div class="avatar">
+                        <img src="https://mc-heads.net/avatar/{{mcname}}" alt="">
+                    </div>
+                    <div class="info">
+                        {{mcname}}
+                    </div>
+                </div>
+            </div>
+            <div class="comfirm">
+                <div class="info">
+                    您確定要將兩個帳號
+                </div>
+                <div class="info">
+                    在晚安鎮進行連接嗎？
+                </div>
+                <div class="btn-container">
+                    <form method="POST" action="/link">
+                        <button class="btn info" type="submit">
+                            確認
+                            <div class="form-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>format-align-left</title><path d="M3,3H21V5H3V3M3,7H15V9H3V7M3,11H21V13H3V11M3,15H15V17H3V15M3,19H21V21H3V19Z" /></svg>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
