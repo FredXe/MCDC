@@ -75,11 +75,12 @@ async def list_all(interaction: discord.Interaction, account: Optional[str]):
                     mcname = mcdc['mcname']
                     break
         
-        if not mcname:
-            embed = discord.Embed(title='No Linked Account', color=discord.Color.red())
     else:
         for mcdc in all_mcdc: mcname += f"**`{mcdc['mcname']}`**\n"
         for mcdc in all_mcdc: dcid += f"<@{mcdc['dcid']}>\n"
+
+    if not mcname:
+        embed = discord.Embed(title='No Linked Account', color=discord.Color.red())
 
     embed.add_field(name='Minecraft', value=mcname, inline=True)
     embed.add_field(name='Discord', value=dcid, inline=True)
