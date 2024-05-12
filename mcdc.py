@@ -29,7 +29,7 @@ class McDcConfig(BasicConfig):
 
 TOKEN_STORE_KEY = 'mcUser'
 LINK_TOKEN_STORE_KEY = 'mcdc'
-TOKEN_EXPIRES_IN = 30
+TOKEN_EXPIRES_IN = 300
 
 
 
