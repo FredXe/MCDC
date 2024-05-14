@@ -178,6 +178,7 @@ def dc2OAuth():
     # Set token for linking
     token = cipher_suite.encrypt(token)
     hashed_token = b64encode(bytes.fromhex(sha256(token).hexdigest())).decode()
+    hashed_token = hashed_token.replace('+', '')
 
     res = flask.make_response(redirect(DISCORD_2OAUTH_URL + '&state=%s' % hashed_token, code=302))
     res.set_cookie(TOKEN_STORE_KEY, value=token.decode(), max_age=TOKEN_EXPIRES_IN, secure=True, httponly=True)
@@ -194,8 +195,7 @@ def link():
         token = token.encode()
         # check state param in redirect url
         hashed_token = b64encode(bytes.fromhex(sha256(token).hexdigest())).decode()
-        hashed_token.replace('+', '')
-        state.replace('+', '')
+        hashed_token = hashed_token.replace('+', '')
         if hashed_token != state:
             raise Exception('invalid token')
         # decode token
