@@ -84,13 +84,14 @@ def encrypt_uuid(id: str) -> str:
     return cipher.decode()
 
 def till_player_join(server: PluginServerInterface, rcon: RconConnection, player: str):
-    while str(rcon.send_command(f'list')).find(player) == -1:
-        time.sleep(0.1)
+    n = 0
+    while n < 15 and str(rcon.send_command(f'list')).find(player) == -1:
+        time.sleep(0.2)
         server.execute(f'send {player} {config.lobby_rcon.proxy_server_name}')
 
 # Kick function for count down
 def kick(server: PluginServerInterface, player: str):
-    if (player_linked(player)['linked']): 
+    if (player_linked(player)['linked']):
         MAIN_RCON.send_command(f'whitelist add {player}')
         return
     server.execute(f'send {player} {config.lobby_rcon.proxy_server_name}')

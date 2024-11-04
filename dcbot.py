@@ -54,8 +54,7 @@ async def list_all(interaction: discord.Interaction, account: Optional[str]):
     all_mcdc = requests.get('%s/linked/all' % config.mcdc_api).json()
 
     embed = discord.Embed(title='Linked Accounts', color=discord.Color.green())
-    mcname = ''
-    dcid = ''
+    acc_str = ''
 
     # make table
     if account:
@@ -65,25 +64,21 @@ async def list_all(interaction: discord.Interaction, account: Optional[str]):
         if account_type == 'dc':
             for mcdc in all_mcdc:
                 if mcdc['dcid'] == account:
-                    dcid = f"<@{mcdc['dcid']}>"
-                    mcname = mcdc['mcname']
+                    acc_str += f"- <@{mcdc['dcid']}>\n> **`{mcdc['mcname']}`**\n"
                     break
         else:
             for mcdc in all_mcdc:
                 if mcdc['mcname'].lower() == account.lower():
-                    dcid = f"<@{mcdc['dcid']}>"
-                    mcname = mcdc['mcname']
+                    acc_str += f"- <@{mcdc['dcid']}>\n> **`{mcdc['mcname']}`**\n"
                     break
-        
-    else:
-        for mcdc in all_mcdc: mcname += f"**`{mcdc['mcname']}`**\n"
-        for mcdc in all_mcdc: dcid += f"<@{mcdc['dcid']}>\n"
 
-    if not mcname:
+    else:
+        for mcdc in all_mcdc: acc_str += f"- <@{mcdc['dcid']}>\n> **`{mcdc['mcname']}`**\n"
+
+    if not acc_str:
         embed = discord.Embed(title='No Linked Account', color=discord.Color.red())
 
-    embed.add_field(name='Minecraft', value=mcname, inline=True)
-    embed.add_field(name='Discord', value=dcid, inline=True)
+    embed.add_field(name='🧚‍♀️', value=acc_str, inline=True)
 
     await interaction.response.send_message(embed=embed, ephemeral=True)
 
