@@ -53,7 +53,6 @@ async def list_all(interaction: discord.Interaction, account: Optional[str]):
 
     all_mcdc = requests.get('%s/linked/all' % config.mcdc_api).json()
 
-    embed = discord.Embed(title='Linked Accounts', color=discord.Color.green())
     acc_str = ''
 
     # make table
@@ -75,10 +74,11 @@ async def list_all(interaction: discord.Interaction, account: Optional[str]):
     else:
         for mcdc in all_mcdc: acc_str += f"- <@{mcdc['dcid']}>\n> **`{mcdc['mcname']}`**\n"
 
+
     if not acc_str:
         embed = discord.Embed(title='No Linked Account', color=discord.Color.red())
-
-    embed.add_field(name='🧚‍♀️', value=acc_str, inline=True)
+    else:
+        embed = discord.Embed(title='Linked Accounts', color=discord.Color.green(), description=acc_str)
 
     await interaction.response.send_message(embed=embed, ephemeral=True)
 
